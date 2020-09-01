@@ -164,9 +164,57 @@ response:
 ]
 
 ```
-
-
+## Running the environment
 ```
-docker-compose build app
-docker-compose up -d
+1. Clone the repository
+    > git clone https://github.com/AnandPr123/TaskManagerAPI.git
+    
+2. Change the directory
+    > cd TaskManagerAPI 
+ 
+3. Create  .env file
+    > cp .env.example .env
+    
+4. Open .env
+    > nano .env
+    
+5. Change the following field
+    DB_HOST=db
+    
+    Save the file when you’re done editing, you can do that by pressing Ctrl+x, then Y and Enter to confirm
+    
+6. Build the app image with the following command:
+    > docker-compose build app
+    
+7. When the build is finished, you can run the environment in background mode with:
+    > docker-compose up -d
+  
+8. To show information about the state of your active services, run:
+    > docker-compose ps
+    
+9. Run composer install to install the application dependencies:
+    > docker-compose exec app composer install
+ 
+10. Do the migration
+    > docker-compose exec app php artisan migrate 
+    > docker-compose exec app php artisan migrate:refresh 
+    
+11. The last thing we need to do before testing the application is to generate a unique application key with the artisan Laravel command-line tool. This key is used to encrypt user sessions and other sensitive data:
+    > docker-compose exec app php artisan key:generate
+    
+ ```   
+## Hurray!  you are done, now open the Postman and hit the exposed endpoints on http://localhost:8000/api/
+
+## Example
 ```
+To create a team, hit api on
+        
+http://localhost:8000/api/teams
+        
+request:
+    {
+        "name":"Platform-tools"
+    }
+```
+    
+    
